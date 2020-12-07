@@ -1,6 +1,6 @@
 {
   "jwtPrivateKey": "",
   "db": "45.77.186.74",
-  "port": "8080",
+  "port": "3000",
   "requiresAuth": true
 }
