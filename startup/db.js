@@ -1,15 +1,15 @@
-// const winston = require("winston");
-// const mongoose = require("mongoose");
-// const config = require("config");
+const mongoose = require("mongoose"); // Import mongoose library
 
-// module.exports = function () {
-//   const db = config.get("db");
-//   mongoose
-//     .connect(db, {
-//       useNewUrlParser: true,
-//       useUnifiedTopology: true,
-//       useCreateIndex: true,
-//       useFindAndModify: false,
-//     })
-//     .then(() => winston.info(`Connected to ${db}...`));
-// };
+module.exports = function () {
+  mongoose.connect("mongodb://localhost:27017/", {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  });
+  mongoose.connection
+    .once("open", function () {
+      console.log("Conection has been made!");
+    })
+    .on("error", function (error) {
+      console.log("Error is: ", error);
+    });
+};
