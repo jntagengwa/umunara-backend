@@ -1,4 +1,3 @@
-const winston = require("winston");
 const express = require("express");
 const config = require("config");
 const app = express();
@@ -15,4 +14,3 @@ const port = process.env.PORT || config.get("port");
 app.listen(port, function () {
   console.log(`Express server listening on port ${port}`);
 });
-module.exports = app;
