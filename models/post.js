@@ -1,5 +1,5 @@
 const Joi = require("@hapi/joi");
-Joi.objectId = require("joi-objectId")(Joi);
+Joi.objectId = require("joi-objectid")(Joi);
 const mongoose = require("mongoose");
 const { categorySchema } = require("./category");
 
