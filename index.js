@@ -1,7 +1,6 @@
 const winston = require("winston");
 const express = require("express");
 const config = require("config");
-const http = require("http");
 const app = express();
 
 require("./startup/logging")();
@@ -13,7 +12,7 @@ require("./startup/validation")();
 require("./startup/prod")(app);
 
 const port = process.env.PORT || config.get("port");
-const server = http.createServer(app);
-server.listen(port);
-server.on("error", onError);
-module.exports = server;
+app.listen(port, function () {
+  console.log(`Express server listening on port ${port}`);
+});
+module.exports = app;
