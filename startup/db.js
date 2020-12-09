@@ -1,9 +1,11 @@
 const mongoose = require("mongoose"); // Import mongoose library
+const config = require("config");
 
 module.exports = function () {
-  mongoose.connect("mongodb://localhost:27017/", {
+  mongoose.connect(config.get("db"), {
     useNewUrlParser: true,
     useCreateIndex: true,
+    useUnifiedTopology: true,
   });
   mongoose.connection
     .once("open", function () {
