@@ -1,6 +1,6 @@
 {
   "jwtPrivateKey": "",
-  "db": "mongodb://admin:admin@umunara-backend.com/admin",
+  "db": "mongodb://admin:admin@45.32.132.141/admin",
   "port": "5000",
   "requiresAuth": true
 }
