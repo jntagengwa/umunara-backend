@@ -1,5 +1,6 @@
 {
   "jwtPrivateKey": "",
-  "port": "3000",
+  "db": "mongodb://admin:admin@45.32.132.141/admin",
+  "port": "5000",
   "requiresAuth": true
 }
