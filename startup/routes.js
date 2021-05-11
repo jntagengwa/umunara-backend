@@ -1,5 +1,6 @@
 const express = require("express");
 const members = require("../routes/members");
+const registrations = require("../routes/registrations");
 const posts = require("../routes/posts");
 const categories = require("../routes/categories");
 const users = require("../routes/users");
@@ -9,6 +10,7 @@ const error = require("../middleware/error");
 module.exports = function (app) {
   app.use(express.json());
   app.use("/api/members", members);
+  app.use("/api/registrations", registrations);
   app.use("/api/posts", posts);
   app.use("/api/categories", categories);
   app.use("/api/users", users);
