@@ -1,7 +1,7 @@
 const Joi = require("@hapi/joi");
 const mongoose = require("mongoose");
 
-const registerSchema = new mongoose.Schema({
+const registrationSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
@@ -46,9 +46,9 @@ const registerSchema = new mongoose.Schema({
   },
 });
 
-const Register = mongoose.model("Register", registerSchema);
+const Registration = mongoose.model("Registration", registrationSchema);
 
-function validateRegister(register) {
+function validateRegistration(registration) {
   const schema = {
     firstName: Joi.string().min(5).max(50).required(),
     lastName: Joi.string().min(5).max(50).required(),
@@ -59,8 +59,8 @@ function validateRegister(register) {
     getInvolved: Joi.string().min(4).max(40).required(),
   };
 
-  return Joi.validate(register, schema);
+  return Joi.validate(registration, schema);
 }
 
-exports.Register = Register;
-exports.validate = validateRegister;
+exports.Registration = Registration;
+exports.validate = validateRegistration;

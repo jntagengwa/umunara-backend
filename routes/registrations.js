@@ -1,21 +1,21 @@
 const validateObjectId = require("../middleware/validateObjectId");
 const auth = require("../middleware/auth");
 const admin = require("../middleware/admin");
-const { Register, validate } = require("../models/register");
+const { Registration, validate } = require("../models/registration");
 const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const registers = await Register.find().select("-__v").sort("name");
-  res.send(registers);
+  const registrations = await Registration.find().select("-__v").sort("name");
+  res.send(registrations);
 });
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let register = new Register({
+  let registration = new Registration({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -24,16 +24,16 @@ router.post("/", async (req, res) => {
     hopes: req.body.hopes,
     getInvolved: req.body.getInvolved,
   });
-  register = await register.save();
+  registration = await registration.save();
 
-  res.send(register);
+  res.send(registration);
 });
 
 router.put("/:id", [auth, validateObjectId], async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  const register = await Register.findByIdAndUpdate(
+  const registration = await Registration.findByIdAndUpdate(
     req.params.id,
     {
       firstName: req.body.firstName,
@@ -49,34 +49,36 @@ router.put("/:id", [auth, validateObjectId], async (req, res) => {
     }
   );
 
-  if (!register)
+  if (!registration)
     return res
       .status(404)
-      .send("The register with the given ID was not found.");
+      .send("The registration with the given ID was not found.");
 
-  res.send(register);
+  res.send(registration);
 });
 
 router.delete("/:id", [auth, admin, validateObjectId], async (req, res) => {
-  const register = await Register.findByIdAndRemove(req.params.id);
+  const registration = await Registration.findByIdAndRemove(req.params.id);
 
-  if (!register)
+  if (!registration)
     return res
       .status(404)
-      .send("The register with the given ID was not found.");
+      .send("The registration with the given ID was not found.");
 
-  res.send(register);
+  res.send(registration);
 });
 
 router.get("/:id", validateObjectId, async (req, res) => {
-  const register = await Register.findById(req.params.id).select("-__v");
+  const registration = await Registration.findById(req.params.id).select(
+    "-__v"
+  );
 
-  if (!register)
+  if (!registration)
     return res
       .status(404)
-      .send("The register with the given ID was not found.");
+      .send("The registration with the given ID was not found.");
 
-  res.send(register);
+  res.send(registration);
 });
 
 module.exports = router;
