@@ -5,7 +5,7 @@ const memberSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 2,
     maxlength: 50,
   },
   number: {
@@ -33,7 +33,7 @@ const Member = mongoose.model("Member", memberSchema);
 
 function validateMember(member) {
   const schema = {
-    name: Joi.string().min(5).max(50).required(),
+    name: Joi.string().min(2).max(50).required(),
     number: Joi.number().min(1).max(9999999999).required(),
     email: Joi.string().min(6).max(36).required(),
     denomination: Joi.string().min(4).max(40).required(),

@@ -5,13 +5,13 @@ const registrationSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 2,
     maxlength: 50,
   },
   lastName: {
     type: String,
     required: true,
-    minlength: 5,
+    minlength: 2,
     maxlength: 50,
   },
   email: {
@@ -41,7 +41,7 @@ const registrationSchema = new mongoose.Schema({
   getInvolved: {
     type: String,
     required: true,
-    minlength: 4,
+    minlength: 2,
     maxlength: 40,
   },
 });
@@ -50,13 +50,13 @@ const Registration = mongoose.model("Registration", registrationSchema);
 
 function validateRegistration(registration) {
   const schema = {
-    firstName: Joi.string().min(5).max(50).required(),
-    lastName: Joi.string().min(5).max(50).required(),
+    firstName: Joi.string().min(2).max(50).required(),
+    lastName: Joi.string().min(2).max(50).required(),
     email: Joi.string().min(6).max(36).required(),
     homeChurch: Joi.string().min(1).max(300).required(),
     thoughts: Joi.string().min(6).max(300),
     hopes: Joi.string().min(6).max(300).required(),
-    getInvolved: Joi.string().min(4).max(40).required(),
+    getInvolved: Joi.string().min(2).max(40).required(),
   };
 
   return Joi.validate(registration, schema);

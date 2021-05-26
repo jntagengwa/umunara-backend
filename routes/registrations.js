@@ -7,7 +7,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const registrations = await Registration.find().select("-__v").sort("name");
+  const registrations = await Registration.find()
+    .select("-__v")
+    .sort("firstName");
   res.send(registrations);
 });
 
